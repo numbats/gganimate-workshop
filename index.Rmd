@@ -96,6 +96,48 @@ theme_set(
 
 ---
 
+Crazy animated intro slide
+
+---
+
+gganimate history (1-2 mins)
+
+---
+
+Motivate learning gganimate - the continuum static/animated/interactive
+
+---
+
+Brief overview of ggplot2 (3 mins)
+
+---
+
+Your turn:
+
+Making the first animation (building up from ggplot2, then adding animation code)
+
+---
+
+More details about gganimate ideas (transitions, views, shadows, enter/exit, controls)
+
+---
+
+Your turn: 
+
+gapminder
+
+---
+
+Exporting animations
+
+---
+
+Your turn:
+
+Make your own animation
+
+---
+
 class: inverse, top
 
 .sticker-float[![fable](resources/gganimate.png)]
