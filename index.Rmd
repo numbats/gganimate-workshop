@@ -1,0 +1,115 @@
+---
+title: "wombat::gganimate"
+subtitle: "Introduction to gganimate"
+author: 
+  - "Mitchell O'Hara-Wild"
+  - "Ursula Laa"
+  - "Nicholas Spyrison"
+date: '30/10/2018'
+output:
+  xaringan::moon_reader:
+    chakra: libs/remark-latest.min.js
+    css: ["libs/slides.css",  "libs/animate.css"]
+    lib_dir: libs
+    seal: false
+    nature:
+      highlightStyle: github
+      ratio: '16:9'
+      highlightLines: true
+      countIncrementalSlides: false
+      beforeInit: ["libs/jquery/jquery.min.js", "libs/slides.js"]
+---
+class: inverse
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE, width = 120)
+
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(fontawesome)
+library(lubridate)
+library(htmltools)
+
+opts_chunk$set(
+  echo = FALSE, warning = FALSE, message = FALSE, comment = "#>",
+  fig.path = 'figure/', cache.path = 'cache/', fig.align = 'center',
+  fig.width = 12, fig.height = 4, fig.show = 'hold',
+  cache = TRUE, external = TRUE, dev = 'svglite', dev.args = list(bg = "transparent")
+)
+
+mp4_vid <- function(src){
+  HTML(
+    paste0(
+      '<video autoplay>
+        <source src="', src, '" type="video/mp4">
+      </video>'
+    )
+  )
+}
+
+hook_output <- knit_hooks$get("output")
+knit_hooks$set(output = function(x, options) {
+   lines <- options$output.lines
+   if (is.null(lines)) {
+     return(hook_output(x, options))  # pass to default hook
+   }
+   x <- unlist(strsplit(x, "\n"))
+   more <- "..."
+   if (length(lines)==1) {        # first n lines
+     if (length(x) > lines) {
+       # truncate the output, but add ....
+       x <- c(head(x, lines), more)
+     }
+   } else {
+     x <- c(more, x[lines], more)
+   }
+   # paste these lines together
+   x <- paste(c(x, ""), collapse = "\n")
+   hook_output(x, options)
+ })
+
+theme_set(
+  theme_grey(base_size = 16) +
+  theme(
+    legend.position = "bottom",
+    plot.background = element_rect(fill = "transparent"),
+    legend.background = element_rect(fill = "transparent")
+  )
+)
+```
+
+.title[gganimate]
+.sticker-float[![fable](resources/gganimate.png)]
+
+## Introduction to gganimate
+
+.bottom[
+### Mitchell O'Hara-Wild (`r fa("twitter", fill="#1da1f2")`[@mitchoharawild](https://twitter.com/mitchoharawild))
+### Ursula Laa (`r fa("twitter", fill="#1da1f2")`[@UschiLaa](https://twitter.com/UschiLaa/))
+### Nicholas Spyrison (`r fa("twitter", fill="#1da1f2")`[@nspyrison](https://twitter.com/nspyrison/))
+
+
+### 22 March 2019
+### Slides @ [mitchelloharawild.com/wombat-gganimate](https://mitchelloharawild.com/wombat-gganimate)
+]
+
+---
+
+class: inverse, top
+
+.sticker-float[![fable](resources/gganimate.png)]
+
+.title[Thanks! `r fa("comments", fill = "white")`]
+
+<br>
+
+.larger[
+`r fa("github", fill = "white")` Learn more on GitHub: [thomasp85/gganimate](https://github.com/thomasp85/gganimate)
+
+`r fa("desktop", fill = "white")` Review slides: [mitchelloharawild.com/fable-tfeam](https://mitchelloharawild.com/fable-tfeam)
+
+<br>
+
+.footnote[This work is licensed as `r fa("creative-commons", fill="white")` BY-NC 4.0.]
+]
