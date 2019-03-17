@@ -106,6 +106,10 @@ gganimate history (1-2 mins)
 
 Motivate learning gganimate - the continuum static/animated/interactive
 
+Include examples
+
+audience - think how you can use animations
+
 ---
 
 Brief overview of ggplot2 (3 mins)
