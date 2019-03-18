@@ -6,8 +6,8 @@
     <meta name="author" content="Mitchell O’Hara-Wild" />
     <meta name="author" content="Ursula Laa" />
     <meta name="author" content="Nicholas Spyrison" />
-    <link rel="stylesheet" href="libs/slides.css" type="text/css" />
-    <link rel="stylesheet" href="libs/animate.css" type="text/css" />
+    <link rel="stylesheet" href="libs\slides.css" type="text/css" />
+    <link rel="stylesheet" href="libs\animate.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -43,6 +43,10 @@ gganimate history (1-2 mins)
 
 Motivate learning gganimate - the continuum static/animated/interactive
 
+Include examples
+
+audience - think how you can use animations
+
 ---
 
 Brief overview of ggplot2 (3 mins)
@@ -61,7 +65,78 @@ More details about gganimate ideas (transitions, views, shadows, enter/exit, con
 
 Your turn: 
 
-gapminder
+gapminder -- static ggplot
+
+
+
+.pull-left[
+
+```r
+p &lt;- ggplot(
+  gapminder,
+  aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
+) +
+  geom_point(show.legend = FALSE, alpha = 0.7) +
+  scale_x_log10() +
+  labs(x = "GDP per capita", y = "Life expectancy")
+p
+```
+]
+.pull-right[
+&lt;img src="figure/gm_output1-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+Transition on year
+
+
+```r
+p &lt;- ggplot(
+  gapminder,
+  aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
+) +
+  geom_point(show.legend = FALSE, alpha = 0.7) +
+  scale_x_log10() +
+  labs(x = "GDP per capita", y = "Life expectancy")
+```
+
+--
+
+
+```r
+*p + transition_time(year) +
+* labs(title = "Year: {frame_time}")
+```
+
+&lt;img src="figure/gm_output2-1.gif" style="display: block; margin: auto;" /&gt;
+
+---
+
+View - fix width to the y-axis
+
+
+```r
+p &lt;- ggplot(
+  gapminder,
+  aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
+) +
+  geom_point(show.legend = FALSE, alpha = 0.7) +
+  scale_x_log10() +
+  labs(x = "GDP per capita", y = "Life expectancy")
+p + transition_time(year) +
+  labs(title = "Year: {frame_time}") +
+```
+
+--
+
+
+```r
+* view_follow(fixed_y = TRUE)
+```
+
+&lt;img src="figure/gm_output3-1.gif" style="display: block; margin: auto;" /&gt;
+
 
 ---
 

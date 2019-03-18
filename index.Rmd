@@ -27,15 +27,16 @@ options(htmltools.dir.version = FALSE, width = 120)
 library(tidyverse)
 library(knitr)
 library(kableExtra)
-library(fontawesome)
+library(fontawesome) #devtools::install_github("rstudio/fontawesome")
 library(lubridate)
 library(htmltools)
+library(gganimate)
 
 opts_chunk$set(
   echo = FALSE, warning = FALSE, message = FALSE, comment = "#>",
   fig.path = 'figure/', cache.path = 'cache/', fig.align = 'center',
   fig.width = 12, fig.height = 4, fig.show = 'hold',
-  cache = TRUE, external = TRUE, dev = 'svglite', dev.args = list(bg = "transparent")
+  cache = TRUE, external = TRUE, dev = 'png', dev.args = list(bg = "transparent")
 )
 
 mp4_vid <- function(src){
@@ -128,7 +129,92 @@ More details about gganimate ideas (transitions, views, shadows, enter/exit, con
 
 Your turn: 
 
-gapminder
+gapminder -- static ggplot
+
+```{r gm_setup, include=FALSE}
+library(gapminder)
+theme_set(theme_bw())
+opts_chunk$set(fig.width = 6, fig.height = 4)
+```
+
+.pull-left[
+```{r gm_plot1, echo=T, eval=F}
+p <- ggplot(
+  gapminder,
+  aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
+) +
+  geom_point(show.legend = FALSE, alpha = 0.7) +
+  scale_x_log10() +
+  labs(x = "GDP per capita", y = "Life expectancy")
+p
+```
+]
+.pull-right[
+```{r gm_output1}
+p <- ggplot(
+  gapminder,
+  aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
+) +
+  geom_point(show.legend = FALSE, alpha = 0.7) +
+  scale_x_log10() +
+  labs(x = "GDP per capita", y = "Life expectancy")
+p
+```
+]
+
+---
+
+Transition on year
+
+```{r gm_plot2_q, echo=T, eval=F}
+p <- ggplot(
+  gapminder,
+  aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
+) +
+  geom_point(show.legend = FALSE, alpha = 0.7) +
+  scale_x_log10() +
+  labs(x = "GDP per capita", y = "Life expectancy")
+```
+
+--
+
+```{r gm_plot2_a, echo=T, eval=F}
+p + transition_time(year) + #<<
+  labs(title = "Year: {frame_time}") #<<
+```
+
+```{r gm_output2}
+p + transition_time(year) +
+  labs(title = "Year: {frame_time}")
+```
+
+---
+
+View - fix width to the y-axis (scale to x-axis)
+
+```{r gm_plot3_q, echo=T, eval=F}
+p <- ggplot(
+  gapminder,
+  aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
+) +
+  geom_point(show.legend = FALSE, alpha = 0.7) +
+  scale_x_log10() +
+  labs(x = "GDP per capita", y = "Life expectancy")
+p + transition_time(year) +
+  labs(title = "Year: {frame_time}") +
+```
+
+--
+
+```{r gm_plot3_a, echo=T, eval=F}
+  view_follow(fixed_y = TRUE) #<<
+```
+
+```{r gm_output3}
+p + transition_time(year) +
+  labs(title = "Year: {frame_time}") +
+  view_follow(fixed_x = TRUE)
+```
 
 ---
 
