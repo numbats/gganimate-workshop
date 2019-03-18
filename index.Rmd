@@ -99,7 +99,7 @@ theme_set(
 ```
 
 .title[gganimate]
-.sticker-float[![fable](resources/gganimate.png)]
+.sticker-float[![gganimate](resources/gganimate.png)]
 
 ## Introduction to gganimate
 
@@ -120,13 +120,13 @@ class: inverse
 class: inverse
 
 .animated.rubberBand.title[gganimate]
-.sticker-float[![fable](resources/gganimate.png)]
+.sticker-float[![gganimate](resources/gganimate.png)]
 
 ---
 class: inverse
 
 .title[gganimate]
-.sticker-float[![fable](resources/gganimate.png)]
+.sticker-float[![gganimate](resources/gganimate.png)]
 
 .animated.rubberBand[
 .desc[Introduction to gganimate]
@@ -136,7 +136,7 @@ class: inverse
 class: inverse
 
 .title[gganimate]
-.sticker-float[![fable](resources/gganimate.png)]
+.sticker-float[![gganimate](resources/gganimate.png)]
 
 .desc[Introduction to gganimate]
 
@@ -155,7 +155,7 @@ class: inverse
 class: inverse
 
 .title[gganimate]
-.sticker-float[![fable](resources/gganimate.png)]
+.sticker-float[![gganimate](resources/gganimate.png)]
 
 .desc[Introduction to gganimate]
 
@@ -175,7 +175,7 @@ class: inverse
 class: inverse
 
 .animated.hinge.title[gganimate]
-.animated.hinge.sticker-float[![fable](resources/gganimate.png)]
+.animated.hinge.sticker-float[![gganimate](resources/gganimate.png)]
 
 .animated.hinge[
 .desc[Introduction to gganimate]
@@ -193,7 +193,27 @@ class: inverse
 
 ---
 
-gganimate history (1-2 mins)
+## What is `gganimate`?
+
+.pull-left[
+An extension to the grammar of graphics for animation.
+
+Specifically allows animations to be added to ggplot2 using a grammar of animation.
+]
+
+.pull-right[
+```{r}
+mp4_vid("resources/gganimate.mp4")
+```
+]
+
+---
+
+## What is `gganimate`?
+
+Background information, history, etc.
+
+.sticker-float[![gganimate](resources/gganimate.png)]
 
 ---
 
@@ -449,7 +469,7 @@ Make your own animation
 
 class: inverse, top
 
-.sticker-float[![fable](resources/gganimate.png)]
+.sticker-float[![gganimate](resources/gganimate.png)]
 
 .title[Thanks! `r fa("comments", fill = "white")`]
 
