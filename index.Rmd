@@ -565,7 +565,17 @@ ggplot(
 
 ---
 
-Exporting animations
+Exporting animations - Manual tours for example
+
+```{r export, echo=T, eval=F}
+anim_save(
+  filename = "./images/MyAnim.gif", animation = MyAnim,
+  start_pause = 15, width = 480, height = 480, res = 150)
+```
+
+```{r, out.width='40%', out.height='40%'}
+knitr::include_graphics("./resources/DIS_mt.gif")
+```
 
 ---
 
