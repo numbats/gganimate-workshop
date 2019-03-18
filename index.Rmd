@@ -114,8 +114,82 @@ theme_set(
 ]
 
 ---
+class: inverse
 
-Crazy animated intro slide
+---
+class: inverse
+
+.animated.rubberBand.title[gganimate]
+.sticker-float[![fable](resources/gganimate.png)]
+
+---
+class: inverse
+
+.title[gganimate]
+.sticker-float[![fable](resources/gganimate.png)]
+
+.animated.rubberBand[
+.desc[Introduction to gganimate]
+]
+
+---
+class: inverse
+
+.title[gganimate]
+.sticker-float[![fable](resources/gganimate.png)]
+
+.desc[Introduction to gganimate]
+
+.bottom[
+.animated.zoomInDown[
+### Mitchell O'Hara-Wild (`r fa("twitter", fill="#1da1f2")`[@mitchoharawild](https://twitter.com/mitchoharawild))
+### Ursula Laa (`r fa("twitter", fill="#1da1f2")`[@UschiLaa](https://twitter.com/UschiLaa/))
+### Nicholas Spyrison (`r fa("twitter", fill="#1da1f2")`[@nspyrison](https://twitter.com/nspyrison/))
+
+### &nbsp;
+### &nbsp;
+]
+]
+
+---
+class: inverse
+
+.title[gganimate]
+.sticker-float[![fable](resources/gganimate.png)]
+
+.desc[Introduction to gganimate]
+
+.bottom[
+### Mitchell O'Hara-Wild (`r fa("twitter", fill="#1da1f2")`[@mitchoharawild](https://twitter.com/mitchoharawild))
+### Ursula Laa (`r fa("twitter", fill="#1da1f2")`[@UschiLaa](https://twitter.com/UschiLaa/))
+### Nicholas Spyrison (`r fa("twitter", fill="#1da1f2")`[@nspyrison](https://twitter.com/nspyrison/))
+
+
+.animated.bounceInRight[
+### 22 March 2019
+### Slides @ [mitchelloharawild.com/wombat-gganimate](https://mitchelloharawild.com/wombat-gganimate)
+]
+]
+
+---
+class: inverse
+
+.animated.hinge.title[gganimate]
+.animated.hinge.sticker-float[![fable](resources/gganimate.png)]
+
+.animated.hinge[
+.desc[Introduction to gganimate]
+]
+
+.animated.hinge.bottom[
+### Mitchell O'Hara-Wild (`r fa("twitter", fill="#1da1f2")`[@mitchoharawild](https://twitter.com/mitchoharawild))
+### Ursula Laa (`r fa("twitter", fill="#1da1f2")`[@UschiLaa](https://twitter.com/UschiLaa/))
+### Nicholas Spyrison (`r fa("twitter", fill="#1da1f2")`[@nspyrison](https://twitter.com/nspyrison/))
+
+### 22 March 2019
+### Slides @ [mitchelloharawild.com/wombat-gganimate](https://mitchelloharawild.com/wombat-gganimate)
+]
+]
 
 ---
 
