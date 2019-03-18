@@ -413,46 +413,55 @@ Your turn:
 
 gapminder -- static ggplot
 
-```{r gm_setup, include=FALSE}
-library(gapminder)
-theme_set(theme_bw())
-opts_chunk$set(fig.width = 6, fig.height = 9)
-```
 
 .left-code[
 ```{r gm_plot1, echo=T, eval=F}
+library(gapminder)
+theme_set(theme_bw())
+
 p <- ggplot(
   gapminder,
   aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
 ) +
-  geom_point(show.legend = FALSE, alpha = 0.7) +
+  geom_point(show.legend = FALSE) +
   scale_x_log10() +
   labs(x = "GDP per capita", y = "Life expectancy")
 p
 ```
 ]
 .right-plot[
-```{r gm_output1, ref.label="gm_plot1", echo=FALSE, cache=TRUE}
+```{r gm_output1, ref.label="gm_plot1", echo=FALSE, cache=TRUE, fig.height = 10}
 ```
 ]
 
 ---
 
-Dense data, how can we animate across year?
+How would you turn this into an animation?
 
-```{r gm_plot2_q, echo=T, eval=F}
+```{r gm_plot1agian, echo=T, eval=F}
+library(gapminder)
+theme_set(theme_bw())
+
 p <- ggplot(
   gapminder,
   aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
 ) +
-  geom_point(show.legend = FALSE, alpha = 0.7) +
+  geom_point(show.legend = FALSE) +
   scale_x_log10() +
   labs(x = "GDP per capita", y = "Life expectancy")
 ```
 
+--
+
+- Use the `transistion_*()` family
+
+--
+
+- `transition_time(year)`
+
 ---
 
-Dense data, let's transition on year
+transition on year
 
 .left-code[
 ```{r gm_plot2_a, echo=T, eval=F}
@@ -462,7 +471,7 @@ p + transition_time(year) + #<<
 ]
 
 .right-plot[
-```{r gm_output2, ref.label="gm_plot2_a", echo=FALSE, cache=TRUE}
+```{r gm_output2, ref.label="gm_plot2_a", echo=FALSE, cache=TRUE, fig.height = 10}
 ```
 ]
 
@@ -470,29 +479,19 @@ p + transition_time(year) + #<<
 
 View - fix width to the y-axis (scale to x-axis)
 
-```{r gm_plot3_q, echo=T, eval=F}
-p <- ggplot(
-  gapminder,
-  aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
-) +
-  geom_point(show.legend = FALSE, alpha = 0.7) +
-  scale_x_log10() +
-  labs(x = "GDP per capita", y = "Life expectancy")
+.left-code[
+```{r gm_plot3, echo=T, eval=F}
 p + transition_time(year) +
   labs(title = "Year: {frame_time}") +
-```
-
---
-
-```{r gm_plot3_a, echo=T, eval=F}
   view_follow(fixed_y = TRUE) #<<
 ```
+]
 
-```{r gm_output3}
-p + transition_time(year) +
-  labs(title = "Year: {frame_time}") +
-  view_follow(fixed_x = TRUE)
+.right-plot[
+```{r gm_output3, ref.label="gm_plot3", echo=FALSE, cache=TRUE, fig.height = 10}
 ```
+]
+
 
 ---
 
