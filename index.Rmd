@@ -458,7 +458,7 @@ class: inverse, top
 .larger[
 `r fa("github", fill = "white")` Learn more on GitHub: [thomasp85/gganimate](https://github.com/thomasp85/gganimate)
 
-`r fa("desktop", fill = "white")` Review slides: [mitchelloharawild.com/fable-tfeam](https://mitchelloharawild.com/fable-tfeam)
+`r fa("desktop", fill = "white")` Review slides: [mitchelloharawild.com/wombat-gganimate](https://mitchelloharawild.com/wombat-gganimate)
 
 <br>
 
