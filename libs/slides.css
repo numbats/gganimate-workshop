@@ -43,6 +43,10 @@ a, a > code {
   margin: 0;
 }
 
+.desc {
+  font-size:45px;
+}
+
 .thesisplot img{
   height: 400px;
 }
