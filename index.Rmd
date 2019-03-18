@@ -21,6 +21,23 @@ output:
 ---
 class: inverse
 
+```{css, echo=FALSE}
+/* custom.css */
+.left-code {
+  color: #777;
+  width: 38%;
+  height: 92%;
+  float: left;
+}
+.right-plot {
+  width: 50%;
+  float: right;
+  padding-left: 1%;
+}
+```
+
+
+
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE, width = 120)
 
@@ -30,6 +47,8 @@ library(kableExtra)
 library(fontawesome)
 library(lubridate)
 library(htmltools)
+library(datasauRus)
+library(gganimate)
 
 opts_chunk$set(
   echo = FALSE, warning = FALSE, message = FALSE, comment = "#>",
@@ -114,8 +133,137 @@ audience - think how you can use animations
 
 Brief overview of ggplot2 (3 mins)
 
+Concepts: data, mapping variables to aestetics, using graphical primitives
+
+page desing inspired by https://t.co/soHH4Qvz4F and https://www.garrickadenbuie.com/blog/decouple-code-and-output-in-xaringan-slides/
+
 ---
 
+Start by passing data to ggplot
+
+.left-code[
+```{r plot1, eval=FALSE, echo=TRUE}
+ggplot(economics) #<<
+```
+]
+.right-plot[
+```{r output1, ref.label="plot1", echo=FALSE, cache=TRUE, fig.height = 8}
+```
+]
+---
+
+Add the mapping - x axis shows date, y axis unemployment
+
+.left-code[
+```{r plot2, eval=FALSE, echo=TRUE}
+ggplot(economics) +
+  aes(date, unemploy)#<<
+```
+]
+.right-plot[
+```{r output2, ref.label="plot2", echo=FALSE, cache=TRUE, fig.height = 8}
+```
+]
+---
+
+Now adding graphical primitive to be used, lets try scatter points
+
+.left-code[
+```{r plot3, eval=FALSE, echo=TRUE}
+ggplot(economics) +
+  aes(date, unemploy) +
+  geom_point() #<<
+```
+]
+.right-plot[
+```{r output3, ref.label="plot3", echo=FALSE, cache=TRUE, fig.height = 8}
+```
+]
+---
+
+Actually a line graph is better suited in this case
+
+.left-code[
+```{r plot4, eval=FALSE, echo=TRUE}
+ggplot(economics) +
+  aes(date, unemploy) +
+  geom_line() #<<
+```
+]
+.right-plot[
+```{r output4, ref.label="plot4", echo=FALSE, cache=TRUE, fig.height = 8}
+```
+]
+---
+Lets look at more complicated example, the datasaurus dozen
+
+.left-code[
+```{r plot5, eval=FALSE, echo=TRUE}
+ggplot(datasaurus_dozen)#<<
+```
+]
+.right-plot[
+```{r output5, ref.label="plot5", echo=FALSE, cache=TRUE, fig.height = 10}
+```
+]
+---
+For each dataset we have x and y values, lets map dataset to color
+
+.left-code[
+```{r plot6, eval=FALSE, echo=TRUE}
+ggplot(datasaurus_dozen) +
+  aes(x, y, color=dataset)#<<
+```
+]
+.right-plot[
+```{r output6, ref.label="plot6", echo=FALSE, cache=TRUE, fig.height = 10}
+```
+]
+---
+Trying a simple scatter plot does not help, there is too much information
+.left-code[
+```{r plot7, eval=FALSE, echo=TRUE}
+ggplot(datasaurus_dozen) +
+  aes(x, y, color=dataset) +
+  geom_point() #<<
+```
+]
+.right-plot[
+```{r output7, ref.label="plot7", echo=FALSE, cache=TRUE, fig.height = 10}
+```
+]
+---
+We can use facets to split up by dataset, revealing the different distributions
+.left-code[
+```{r plot8, eval=FALSE, echo=TRUE}
+ggplot(datasaurus_dozen) +
+  aes(x, y, color=dataset) +
+  geom_point() +
+  facet_wrap(~dataset)#<<
+```
+]
+.right-plot[
+```{r output8, ref.label="plot8", echo=FALSE, cache=TRUE, fig.height = 10}
+```
+]
+---
+We can just as easily turn it into an animation! -- but need to figure out how to include this in the slides
+.left-code[
+```{r plot9, eval=FALSE, echo=TRUE}
+ggplot(datasaurus_dozen) +
+  aes(x, y) +
+  geom_point() +
+  transition_states(dataset, 3, 1)
+
+```
+]
+.right-plot[
+#```{r output9, ref.label="plot9", echo=FALSE, cache=TRUE, fig.show='animate'}
+#```
+]
+
+
+---
 Your turn:
 
 Making the first animation (building up from ggplot2, then adding animation code)
