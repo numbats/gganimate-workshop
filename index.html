@@ -14,6 +14,23 @@
 
 class: inverse
 
+&lt;style type="text/css"&gt;
+/* custom.css */
+.left-code {
+  color: #777;
+  width: 38%;
+  height: 92%;
+  float: left;
+}
+.right-plot {
+  width: 50%;
+  float: right;
+  padding-left: 1%;
+}
+&lt;/style&gt;
+
+
+
 
 
 .title[gganimate]
@@ -51,8 +68,138 @@ audience - think how you can use animations
 
 Brief overview of ggplot2 (3 mins)
 
+Concepts: data, mapping variables to aestetics, using graphical primitives
+
+page desing inspired by https://t.co/soHH4Qvz4F and https://www.garrickadenbuie.com/blog/decouple-code-and-output-in-xaringan-slides/
+
 ---
 
+Start by passing data to ggplot
+
+.left-code[
+
+```r
+*ggplot(economics)
+```
+]
+.right-plot[
+&lt;img src="figure/output1-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+
+Add the mapping - x axis shows date, y axis unemployment
+
+.left-code[
+
+```r
+ggplot(economics) +
+* aes(date, unemploy)
+```
+]
+.right-plot[
+&lt;img src="figure/output2-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+
+Now adding graphical primitive to be used, lets try scatter points
+
+.left-code[
+
+```r
+ggplot(economics) +
+  aes(date, unemploy) +
+* geom_point()
+```
+]
+.right-plot[
+&lt;img src="figure/output3-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+
+Actually a line graph is better suited in this case
+
+.left-code[
+
+```r
+ggplot(economics) +
+  aes(date, unemploy) +
+* geom_line()
+```
+]
+.right-plot[
+&lt;img src="figure/output4-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+Lets look at more complicated example, the datasaurus dozen
+
+.left-code[
+
+```r
+*ggplot(datasaurus_dozen)
+```
+]
+.right-plot[
+&lt;img src="figure/output5-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+For each dataset we have x and y values, lets map dataset to color
+
+.left-code[
+
+```r
+ggplot(datasaurus_dozen) +
+* aes(x, y, color=dataset)
+```
+]
+.right-plot[
+&lt;img src="figure/output6-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+Trying a simple scatter plot does not help, there is too much information
+.left-code[
+
+```r
+ggplot(datasaurus_dozen) +
+  aes(x, y, color=dataset) +
+* geom_point()
+```
+]
+.right-plot[
+&lt;img src="figure/output7-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+We can use facets to split up by dataset, revealing the different distributions
+.left-code[
+
+```r
+ggplot(datasaurus_dozen) +
+  aes(x, y, color=dataset) +
+  geom_point() +
+* facet_wrap(~dataset)
+```
+]
+.right-plot[
+&lt;img src="figure/output8-1.png" style="display: block; margin: auto;" /&gt;
+]
+---
+We can just as easily turn it into an animation! 
+
+.left-code[
+
+```r
+ggplot(datasaurus_dozen) +
+  aes(x, y) +
+  geom_point() +
+* transition_states(dataset, 3, 1) +
+* labs(title = "Dataset: {closest_state}")
+```
+]
+.right-plot[
+&lt;img src="figure/output9-1.gif" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
 Your turn:
 
 Making the first animation (building up from ggplot2, then adding animation code)
@@ -69,7 +216,7 @@ gapminder -- static ggplot
 
 
 
-.pull-left[
+.left-code[
 
 ```r
 p &lt;- ggplot(
@@ -82,13 +229,13 @@ p &lt;- ggplot(
 p
 ```
 ]
-.pull-right[
+.right-plot[
 &lt;img src="figure/gm_output1-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
-Transition on year
+Dense data, let's transition on year
 
 
 ```r
@@ -101,19 +248,25 @@ p &lt;- ggplot(
   labs(x = "GDP per capita", y = "Life expectancy")
 ```
 
---
+---
 
+Dense data, let's transition on year
+
+.left-code[
 
 ```r
 *p + transition_time(year) +
 * labs(title = "Year: {frame_time}")
 ```
+]
 
+.right-plot[
 &lt;img src="figure/gm_output2-1.gif" style="display: block; margin: auto;" /&gt;
+]
 
 ---
 
-View - fix width to the y-axis
+View - fix width to the y-axis (scale to x-axis)
 
 
 ```r
@@ -136,7 +289,6 @@ p + transition_time(year) +
 ```
 
 &lt;img src="figure/gm_output3-1.gif" style="display: block; margin: auto;" /&gt;
-
 
 ---
 
