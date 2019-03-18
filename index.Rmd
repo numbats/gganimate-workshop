@@ -211,15 +211,31 @@ mp4_vid("resources/gganimate.mp4")
 
 ## What is `gganimate`?
 
+
+
 Background information, history, etc.
 
 .sticker-float[![gganimate](resources/gganimate.png)]
 
 ---
 
-Motivate learning gganimate - the continuum static/animated/interactive
+## Why should I animate?
+
+the continuum static/animated/interactive
+
+---
+
+## Animation helps learning (find research articles)
+
+---
+
+## Examples of static, animated & interactive
 
 Include examples
+
+---
+
+## Your turn
 
 audience - think how you can use animations
 
@@ -365,8 +381,31 @@ Your turn:
 Making the first animation (building up from ggplot2, then adding animation code)
 
 ---
+class: inverse
+
+## The grammar of animation
 
 More details about gganimate ideas (transitions, views, shadows, enter/exit, controls)
+
+---
+
+## Transitions
+
+---
+
+## Views
+
+---
+
+## Shadows
+
+---
+
+## Entrances and exits
+
+---
+
+## Animation controls
 
 ---
 
