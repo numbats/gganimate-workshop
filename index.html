@@ -18,7 +18,7 @@ class: inverse
 /* custom.css */
 .left-code {
   color: #777;
-  width: 38%;
+  width: 48%;
   height: 92%;
   float: left;
 }
@@ -377,7 +377,7 @@ How would you turn this into an animation?
 library(gapminder)
 theme_set(theme_bw())
 
-p &lt;- ggplot(
+ggplot(
   gapminder,
   aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
 ) +
@@ -401,7 +401,17 @@ transition on year
 .left-code[
 
 ```r
-*p + transition_time(year) +
+library(gapminder)
+theme_set(theme_bw())
+
+ggplot(
+  gapminder,
+  aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
+) +
+  geom_point(show.legend = FALSE) +
+  scale_x_log10() +
+  labs(x = "GDP per capita", y = "Life expectancy") +
+* transition_time(year) +
 * labs(title = "Year: {frame_time}")
 ```
 ]
@@ -412,20 +422,81 @@ transition on year
 
 ---
 
-View - fix width to the y-axis (scale to x-axis)
+View - fix width to the x-axis (scale to y-axis)
 
 .left-code[
 
 ```r
-p + transition_time(year) +
+library(gapminder)
+theme_set(theme_bw())
+
+ggplot(
+  gapminder,
+  aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
+) +
+  geom_point(show.legend = FALSE) +
+  scale_x_log10() +
+  labs(x = "GDP per capita", y = "Life expectancy") +
+  transition_time(year) +
   labs(title = "Year: {frame_time}") +
 * view_follow(fixed_y = TRUE)
 ```
 ]
-
 .right-plot[
 &lt;img src="figure/gm_output3-1.gif" style="display: block; margin: auto;" /&gt;
 ]
+
+
+---
+
+Shadows - past points to show rate of change
+
+.left-code[
+
+```r
+library(gapminder)
+theme_set(theme_bw())
+
+ggplot(
+  gapminder,
+  aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
+) +
+  geom_point(show.legend = FALSE) +
+  scale_x_log10() +
+  labs(x = "GDP per capita", y = "Life expectancy") +
+  transition_time(year) +
+  labs(title = "Year: {frame_time}") +
+* shadow_wake(wake_length = 0.1, alpha = FALSE)
+```
+]
+.right-plot[
+&lt;img src="figure/gm_output4-1.gif" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+Add your own flavour!
+
+
+```r
+library(gapminder)
+theme_set(theme_bw())
+
+ggplot(
+  gapminder,
+  aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
+) +
+  geom_point(show.legend = FALSE) +
+  scale_x_log10() +
+  labs(x = "GDP per capita", y = "Life expectancy") +
+  transition_time(year) +
+  labs(title = "Year: {frame_time}")
+```
+
+- transition_*() family
+- view_*() family
+- shadow_*() family
+- ggplot2 changes
 
 
 ---
