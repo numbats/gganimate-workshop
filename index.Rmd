@@ -240,16 +240,24 @@ Include examples
 audience - think how you can use animations
 
 ---
+## The basis - ggplot2
 
-Brief overview of ggplot2 (3 mins)
+> a system for declaratively creating graphics, based on "The Grammar of Graphics"
 
-Concepts: data, mapping variables to aestetics, using graphical primitives
+Based on three simple concepts:
 
-page desing inspired by https://t.co/soHH4Qvz4F and https://www.garrickadenbuie.com/blog/decouple-code-and-output-in-xaringan-slides/
+ * Data: input data should be formated in a data frame, where each column is a variable, and each row is an observation
+ * Mapping: declaring a mapping of input data variables onto aestetics
+ * geoms: the graphical primitives, e.g. geom_line, geom_point
+
+Basic workflow: initialise a ggplot by passing in data and mapping, then add layers (geoms) and formatting specifications
+
 
 ---
+## A simple example
+### Using the economics dataset
 
-Start by passing data to ggplot
+Let's start by passing the data to ggplot
 
 .left-code[
 ```{r plot1, eval=FALSE, echo=TRUE}
@@ -260,9 +268,11 @@ ggplot(economics) #<<
 ```{r output1, ref.label="plot1", echo=FALSE, cache=TRUE, fig.height = 8}
 ```
 ]
----
 
-Add the mapping - x axis shows date, y axis unemployment
+---
+## A simple example
+### Using the economics dataset
+The next step is to add the mapping
 
 .left-code[
 ```{r plot2, eval=FALSE, echo=TRUE}
@@ -275,8 +285,9 @@ ggplot(economics) +
 ```
 ]
 ---
-
-Now adding graphical primitive to be used, lets try scatter points
+## A simple example
+### Using the economics dataset
+Now we can add a graphical primitive, lets try a scatter plot
 
 .left-code[
 ```{r plot3, eval=FALSE, echo=TRUE}
@@ -290,7 +301,8 @@ ggplot(economics) +
 ```
 ]
 ---
-
+## A simple example
+### Using the economics dataset
 Actually a line graph is better suited in this case
 
 .left-code[
@@ -305,7 +317,8 @@ ggplot(economics) +
 ```
 ]
 ---
-Lets look at more complicated example, the datasaurus dozen
+## A not-so-simple example, the datasaurus dozen
+Again, we first pass in the dataset to ggplot
 
 .left-code[
 ```{r plot5, eval=FALSE, echo=TRUE}
@@ -317,7 +330,8 @@ ggplot(datasaurus_dozen)#<<
 ```
 ]
 ---
-For each dataset we have x and y values, lets map dataset to color
+## A not-so-simple example, the datasaurus dozen
+For each dataset we have x and y values, in addition we can map dataset to color
 
 .left-code[
 ```{r plot6, eval=FALSE, echo=TRUE}
@@ -330,7 +344,8 @@ ggplot(datasaurus_dozen) +
 ```
 ]
 ---
-Trying a simple scatter plot does not help, there is too much information
+## A not-so-simple example, the datasaurus dozen
+Trying a simple scatter plot first, but there is too much information
 .left-code[
 ```{r plot7, eval=FALSE, echo=TRUE}
 ggplot(datasaurus_dozen) +
@@ -343,6 +358,7 @@ ggplot(datasaurus_dozen) +
 ```
 ]
 ---
+## A not-so-simple example, the datasaurus dozen
 We can use facets to split up by dataset, revealing the different distributions
 .left-code[
 ```{r plot8, eval=FALSE, echo=TRUE}
@@ -357,7 +373,8 @@ ggplot(datasaurus_dozen) +
 ```
 ]
 ---
-We can just as easily turn it into an animation! 
+## A not-so-simple example, the datasaurus dozen
+We can just as easily turn it into an animation, transitioning between dataset states! 
 
 .left-code[
 ```{r plot9, eval=FALSE, echo=TRUE}
@@ -376,11 +393,7 @@ ggplot(datasaurus_dozen) +
 
 
 ---
-Your turn:
 
-Making the first animation (building up from ggplot2, then adding animation code)
-
----
 class: inverse
 
 ## The grammar of animation
