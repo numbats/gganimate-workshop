@@ -514,21 +514,35 @@ More details about gganimate ideas (transitions, views, shadows, enter/exit, con
 
 ## Transitions
 
+How the data changes through the animation.
+
 ---
 
 ## Views
+
+How the plot window changes through the animation.
 
 ---
 
 ## Shadows
 
+How the history of the animation is shown.
+
 ---
 
 ## Entrances and exits
 
+How elements of the plot appear and disappear.
+
 ---
 
 ## Animation controls
+
+How data moves from one position to another. 
+
+```r
+ease_aes({aesthetic} = {ease})
+```
 
 ---
 
