@@ -49,6 +49,8 @@ library(lubridate)
 library(htmltools)
 library(datasauRus)
 library(gganimate)
+library(tsibble)
+library(plotly)
 
 opts_chunk$set(
   echo = FALSE, warning = FALSE, message = FALSE, comment = "#>",
@@ -218,20 +220,128 @@ Background information, history, etc.
 .sticker-float[![gganimate](resources/gganimate.png)]
 
 ---
+class: center
+
 
 ## Why should I animate?
 
-the continuum static/animated/interactive
+<hr>
+
+### Improves graphical re-orientation in time and space.
+
+<br>
+
+--
+
+### More compact delivery of information.
+
+<br>
+
+--
+
+### Allows for guided exploration of data, great for talks.
+
+<br>
+
+--
+
+.animated.bounceIn[
+### Attention grabbing. 
+#### (Tired students? Zzz...)
+]
 
 ---
 
-## Animation helps learning (find research articles)
+## Considerations in making effective animations
+
+<hr>
+
+### Pace: speed of animation
+
+Quick animations may be hard to follow.
+Slow animations are boring and tedious.
+
+--
+
+### Perplex: amount of information
+
+It is easy for animations to be overwhelming and confusing.
+Multiple simple animations can be easier to digest.
+
+--
+
+### Purpose: Usefulness of using animation
+
+Is animation needed? Does it provide additional value?
 
 ---
 
-## Examples of static, animated & interactive
+## Usefulness of animation
 
-Include examples
+### Static
+
+```{r ts-static, echo = FALSE}
+tsibbledata::aus_elec %>% 
+  filter(State == "Victoria") %>% 
+  ggplot(aes(x = Time, y = Demand)) + 
+  geom_line() + 
+  labs(title = "Half-hourly electricity demand", subtitle = "Victoria, Australia (2012-2014)")
+```
+
+---
+
+## Usefulness of animation
+
+### Static
+
+```{r ts-static-zoom, echo = FALSE}
+tsibbledata::aus_elec %>% 
+  filter(State == "Victoria", yearmonth(Time) == yearmonth("2014 June")) %>% 
+  ggplot(aes(x = Time, y = Demand)) + 
+  geom_line() + 
+  labs(title = "Half-hourly electricity demand", subtitle = "Victoria, Australia (June 2014)")
+```
+
+---
+
+## Usefulness of animation
+
+### Animated
+
+```{r ts-animated, eval = FALSE, echo = FALSE, message = FALSE}
+p <- tsibbledata::aus_elec %>% 
+  filter(State == "Victoria") %>% 
+  ggplot(aes(x = Time, y = Demand)) + 
+  geom_line() + 
+  labs(title = "Half-hourly electricity demand", subtitle = "Victoria, Australia") +
+  view_step_manual(1,10, 
+                   c(ymd_hms("2012-01-01 00:00:00"), ymd_hms("2013-7-01 00:00:00")), 
+                   c(ymd_hms("2014-12-31 23:59:59"), ymd_hms("2013-7-30 23:59:59")),
+                   c(2857.946, 3034.097),
+                   c(9345.004,  6543.203),
+                   wrap = FALSE)# %>% 
+
+anim_save("resources/ts-zoom.mp4", p, renderer = ffmpeg_renderer())
+```
+```{r}
+mp4_vid("resources/ts-zoom.mp4")
+```
+
+---
+
+## Usefulness of animation
+
+### Interactive
+
+```{r ts-interactive, echo = FALSE}
+p <- tsibbledata::aus_elec %>% 
+  filter(State == "Victoria") %>% 
+  ggplot(aes(x = Time, y = Demand)) + 
+  geom_line() + 
+  labs(title = "Half-hourly electricity demand", subtitle = "Victoria, Australia") 
+ggplotly(p)
+```
+
 
 ---
 
