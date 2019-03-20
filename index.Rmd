@@ -597,6 +597,28 @@ Your turn:
 Make your own animation
 
 ---
+## Simple alternative: Plotly
+
+We can also use plotly to easily make simple animations via ggplotly and the frames argument, or for more sophisticated applications using "plotlyProxyInvoke" to update inside a Shiny app (see example).
+
+.left-code[
+```{r plotply, eval=FALSE, echo=TRUE}
+library(plotly)
+p <- ggplot(datasaurus_dozen) +
+  aes(x, y, frame = dataset) +
+  geom_point()
+ggplotly(p)
+```
+]
+.right-plot[
+```{r outputply, ref.label="plotply", echo=FALSE, cache=TRUE, fig.height = 5, fig.width=5}
+```
+]
+
+
+
+
+---
 
 class: inverse, top
 
