@@ -370,7 +370,7 @@ p <- tsibbledata::aus_elec %>%
 htmlwidgets::saveWidget(ggplotly(p), "~/github/gganimate-workshop/resources/electricity_plotly.html")
 ```
 
-<iframe src="resources/electricity_plotly.html" width = "1000px", height = "500px" seamless="seamless" frameBorder="0"></iframe> 
+<iframe src="resources/electricity_plotly.html" width = "1000px", height = "400px" seamless="seamless" frameBorder="0"></iframe> 
 
 
 ---
@@ -678,6 +678,47 @@ tribble(
 
 ---
 
+## Transitions
+
+Which transition was used in the following animations?
+
+.pull-left[
+```{r transition-layers}
+ggplot(mtcars, aes(mpg, disp)) +
+  geom_point() +
+  geom_smooth(colour = 'grey', se = FALSE) +
+  geom_smooth(aes(colour = factor(gear))) +
+  transition_layers(layer_length = 1, transition_length = 2,
+                    from_blank = FALSE, keep_layers = c(Inf, 0, 0)) +
+  enter_fade() + exit_fade()
+```
+]
+--
+
+.pull-right[
+`transition_layers()`
+
+New layers are being added (and removed) over the dots.
+]
+
+--
+
+<hr>
+
+.pull-right[
+![](resources/tile-mean.gif)
+]
+
+--
+
+.pull-left[
+`transition_manual()`
+
+No tweening is evident between frames, highlighting the discrete nature of the tiling function.
+]
+
+---
+
 ## Views
 
 How the plot window changes through the animation.
@@ -694,6 +735,47 @@ tribble(
   kable(format = "html") %>%
   kableExtra::kable_styling(font_size = 26)
 ```
+
+---
+
+## Views
+
+Which view was used in the following animations?
+
+.pull-left[
+```{r}
+mp4_vid("resources/ts-zoom.mp4")
+```
+]
+--
+
+.pull-right[
+`view_step_manual()`
+
+The view is changed without modifying the data. You can see the lines are shown without margins.
+]
+
+--
+
+<hr>
+
+.pull-right[
+```{r view-follow}
+ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
+  geom_point() +
+  labs(title = "{closest_state}") +
+  transition_states(Species, transition_length = 4, state_length = 1) +
+  view_follow()
+```
+]
+
+--
+
+.pull-left[
+`view_follow()`
+
+Plot axis follows the range of the data.
+]
 
 ---
 
@@ -763,20 +845,12 @@ class: inverse, center, middle
 ---
 
 ## Making the gapminder animation
+### Load the data and set the theme
 
 .left-code[
 ```{r gm_plot1, echo=T, eval=F}
-library(gapminder)
-theme_set(theme_bw())
-
-gapminder %>% 
-  ggplot(aes(
-    x = gdpPercap, y=lifeExp,
-    size = pop, colour = country
-  )) +
-  geom_point(show.legend = FALSE) +
-  scale_x_log10() +
-  labs(x = "GDP per capita", y = "Life expectancy")
+library(gapminder) #<<
+theme_set(theme_bw()) #<<
 ```
 ]
 .right-plot[
@@ -786,17 +860,132 @@ gapminder %>%
 
 ---
 
-## Turning this into an animation...
+## Making the gapminder animation
+### Define the aesthetics
+
+.left-code[
+```{r gm_plot2, echo=T, eval=F}
+library(gapminder)
+theme_set(theme_bw())
+
+ggplot(gapminder) + #<<
+  aes(x = gdpPercap, y=lifeExp, #<<
+      size = pop, colour = country) #<<
+```
+]
+.right-plot[
+```{r gm_output2, ref.label="gm_plot2", echo=FALSE, cache=TRUE, fig.height = 10}
+```
+]
+
+---
+
+## Making the gapminder animation
+### The plot is feeling a bit pointless...
+
+.left-code[
+```{r gm_plot3, echo=T, eval=F}
+library(gapminder)
+theme_set(theme_bw())
+
+ggplot(gapminder) +
+  aes(x = gdpPercap, y=lifeExp,
+      size = pop, colour = country) +
+  geom_point(show.legend = FALSE)  #<<
+```
+]
+.right-plot[
+```{r gm_output3, ref.label="gm_plot3", echo=FALSE, cache=TRUE, fig.height = 10}
+```
+]
+
+---
+
+## Making the gapminder animation
+### Transform the axis
+
+.left-code[
+```{r gm_plot4, echo=T, eval=F}
+library(gapminder)
+theme_set(theme_bw())
+
+ggplot(gapminder) +
+  aes(x = gdpPercap, y=lifeExp,
+      size = pop, colour = country) +
+  geom_point(show.legend = FALSE) +
+  scale_x_log10() #<<
+```
+]
+.right-plot[
+```{r gm_output4, ref.label="gm_plot4", echo=FALSE, cache=TRUE, fig.height = 10}
+```
+]
+
+---
+
+## Making the gapminder animation
+### ggplot
+
+.left-code[
+```{r gm_plot5, echo=T, eval=F}
+library(gapminder)
+theme_set(theme_bw())
+
+ggplot(gapminder) +
+  aes(x = gdpPercap, y=lifeExp,
+      size = pop, colour = country) +
+  geom_point(show.legend = FALSE) +
+  scale_x_log10() +
+  scale_color_viridis_d() + #<<
+  scale_size(range = c(2, 12)) #<<
+```
+]
+.right-plot[
+```{r gm_output5, ref.label="gm_plot5", echo=FALSE, cache=TRUE, fig.height = 10}
+```
+]
+
+---
+
+## Making the gapminder animation
+### Add some labels
+
+.left-code[
+```{r gm_plot7, echo=T, eval=F}
+library(gapminder)
+theme_set(theme_bw())
+
+ggplot(gapminder) +
+  aes(x = gdpPercap, y=lifeExp,
+      size = pop, colour = country) +
+  geom_point(show.legend = FALSE) +
+  scale_x_log10() +
+  scale_color_viridis_d() +
+  scale_size(range = c(2, 12)) +
+  labs(x = "GDP per capita", y = "Life expectancy") #<<
+```
+]
+.right-plot[
+```{r gm_output7, ref.label="gm_plot7", echo=FALSE, cache=TRUE, fig.height = 10}
+```
+]
+
+---
+
+## Making the gapminder animation
+### Time to animate!
 
 ```{r gm_plot1agian, echo=T, eval=F}
 library(gapminder)
 theme_set(theme_bw())
 
-gapminder %>% 
-  ggplot(aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)) +
+ggplot(gapminder) + 
+  aes(x = gdpPercap, y=lifeExp, 
+      size = pop, colour = country)) +
   geom_point(show.legend = FALSE) +
   scale_x_log10() +
-  labs(x = "GDP per capita", y = "Life expectancy")
+  labs(x = "GDP per capita", y = "Life expectancy") +
+  ??? #<<
 ```
 
 --
@@ -858,7 +1047,7 @@ ggplot(
 ## Changing the view: scaling the y-axis to the data
 
 .left-code[
-```{r gm_plot3, echo=T, eval=F}
+```{r gm_plot3a, echo=T, eval=F}
 library(gapminder)
 theme_set(theme_bw())
 
@@ -875,7 +1064,7 @@ ggplot(
 ```
 ]
 .right-plot[
-```{r gm_output3, ref.label="gm_plot3", echo=FALSE, cache=TRUE, fig.height = 10}
+```{r gm_output3, ref.label="gm_plot3a", echo=FALSE, cache=TRUE, fig.height = 10}
 ```
 ]
 
@@ -888,7 +1077,7 @@ Does this add value to the animation?
 ## Shadow the past: highlight the rate of change
 
 .left-code[
-```{r gm_plot4, echo=T, eval=F}
+```{r gm_plot4a, echo=T, eval=F}
 library(gapminder)
 theme_set(theme_bw())
 
@@ -905,15 +1094,17 @@ ggplot(
 ```
 ]
 .right-plot[
-```{r gm_output4, ref.label="gm_plot4", echo=FALSE, cache=TRUE, fig.height = 10}
+```{r gm_output4a, ref.label="gm_plot4a", echo=FALSE, cache=TRUE, fig.height = 10}
 ```
 ]
+
+Can you see countries that move rapidly?
 
 ---
 
 ## Add your own flavour!
 
-```{r gm_plot5, echo=T, eval=F}
+```{r gm_plot5a, echo=T, eval=F}
 library(gapminder)
 theme_set(theme_bw())
 
