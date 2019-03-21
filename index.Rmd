@@ -607,11 +607,21 @@ ggplot(datasaurus_dozen) +
 
 ---
 
-class: inverse
+class: inverse, middle
 
 .sticker-float[![gganimate](resources/gganimate.png)]
 
 # The grammar of animation
+
+<hr>
+
+### Controlling plot movement with:
+
+- ### Transitions
+- ### Views
+- ### Shadows
+- ### Entrances/Exits
+- ### Easing
 
 ---
 
