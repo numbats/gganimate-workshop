@@ -333,15 +333,21 @@ mp4_vid("resources/ts-zoom.mp4")
 
 ### Interactive
 
-```{r ts-interactive, echo = FALSE}
+```{r ts-interactive, echo = FALSE, eval = FALSE}
 p <- tsibbledata::aus_elec %>% 
   filter(State == "Victoria") %>% 
   ggplot(aes(x = Time, y = Demand)) + 
   geom_line() + 
   labs(title = "Half-hourly electricity demand", subtitle = "Victoria, Australia") 
-ggplotly(p)
+htmlwidgets::saveWidget(ggplotly(p), "~/github/gganimate-workshop/resources/electricity_plotly.html")
 ```
 
+<iframe src="resources/electricity_plotly.html" width = "800px", height = "500px" seamless="seamless" frameBorder="0"></iframe> 
+
+
+---
+
+TODO: second example with BoxCox
 
 ---
 
@@ -424,6 +430,24 @@ ggplot(economics) +
 ]
 .right-plot[
 ```{r output4, ref.label="plot4", echo=FALSE, cache=TRUE, fig.height = 8}
+```
+]
+
+---
+## A simple example
+### Using the economics dataset
+Actually a line graph is better suited in this case
+
+.left-code[
+```{r plot5-anim, eval=FALSE, echo=TRUE}
+ggplot(economics) +
+  aes(date, unemploy) +
+  geom_line() +
+  transition_reveal(date) #<<
+```
+]
+.right-plot[
+```{r output5-anim, ref.label="plot5-anim", echo=FALSE, cache=TRUE, fig.height = 8}
 ```
 ]
 ---
@@ -716,9 +740,23 @@ knitr::include_graphics("./resources/DIS_mt.gif")
 
 ---
 
-Your turn:
+## Exporting animations
 
-Make your own animation
+Renderer options
+```{r}
+fns <- ls(as.environment("package:gganimate"))
+fns[grepl("renderer", fns)]
+```
+
+
+---
+class: inverse, center, middle
+
+.sticker-float[![gganimate](resources/gganimate.png)]
+
+.title[Your turn]
+
+# Make your own animation
 
 ---
 ## Simple alternative: Plotly
