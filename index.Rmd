@@ -437,16 +437,47 @@ class: inverse, center, middle
 ---
 ## The basis - ggplot2
 
+<hr>
+
+<br>
+
 > a system for declaratively creating graphics, based on "The Grammar of Graphics"
+
 
 Based on three simple concepts:
 
- * Data: input data should be formated in a data frame, where each column is a variable, and each row is an observation
- * Mapping: declaring a mapping of input data variables onto aestetics
- * geoms: the graphical primitives, e.g. geom_line, geom_point
+ * __Data__: input data should be formated in a data frame, where each column is a variable, and each row is an observation
+ * __Mapping__: declaring a mapping of input data variables onto aestetics
+ * __geoms__: the graphical primitives, e.g. geom_line, geom_point
 
-Basic workflow: initialise a ggplot by passing in data and mapping, then add layers (geoms) and formatting specifications
+---
 
+## Basic workflow
+
+<hr>
+<br>
+<br>
+--
+
+### Initialise a ggplot by passing in data and mapping
+
+--
+
+### Add layers with graphical primitives (geoms)
+
+
+--
+
+### Add formatting specifications
+
+--
+
+### Add animation specifications
+<br>
+
+--
+
+### Let's try some simple examples!
 
 ---
 ## A simple example
@@ -482,7 +513,7 @@ ggplot(economics) +
 ---
 ## A simple example
 ### Using the economics dataset
-Now we can add a graphical primitive, lets try a scatter plot
+Now we can add a graphical primitive, let's try a scatter plot
 
 .left-code[
 ```{r plot3, eval=FALSE, echo=TRUE}
@@ -515,7 +546,7 @@ ggplot(economics) +
 ---
 ## A simple example
 ### Using the economics dataset
-We can also just as easily animate this.
+Just one extra line turns this into an animation!
 
 .left-code[
 ```{r plot5-anim, eval=FALSE, echo=TRUE}
@@ -927,7 +958,9 @@ class: inverse, center, middle
 ---
 ## Simple alternative: Plotly
 
-We can also use plotly to easily make simple animations via ggplotly and the frames argument, or for more sophisticated applications using "plotlyProxyInvoke" to update inside a Shiny app (see example).
+<hr>
+
+We can also use plotly to easily make simple animations via ggplotly and the frames argument
 
 .left-code[
 ```{r plotply, eval=FALSE, echo=TRUE}
@@ -937,12 +970,14 @@ p <- ggplot(datasaurus_dozen) +
   geom_point()
 ggplotly(p)
 ```
+
+More complicated alternative: use plotly directly (or basic libraries like D3.js) to have more control over the animation details, and e.g. embed them in a Shiny app.
+
 ]
 .right-plot[
 ```{r outputply, ref.label="plotply", echo=FALSE, cache=TRUE, fig.height = 5, fig.width=5}
 ```
 ]
-
 
 
 
