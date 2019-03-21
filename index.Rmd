@@ -543,14 +543,14 @@ How the data changes through the animation.
 ```{r transition-tbl}
 tribble(
   ~ Function, ~ Description,
-  "transition_manual", "Build an animation frame by frame (no tweening applied)",
-  "transition_states", "Transition between frames of a plot (like moving between facets)",
-  "transition_time", "Like transition_states, except animation pacing respects time",
-  "transition_components", "Independent animation of plot elements (by group)",
+  "transition_manual", "Build an animation frame by frame (no tweening applied).",
+  "transition_states", "Transition between frames of a plot (like moving between facets).",
+  "transition_time", "Like transition_states, except animation pacing respects time.",
+  "transition_components", "Independent animation of plot elements (by group).",
   "transition_reveal", "Gradually extends the data used to reveal more information.",
   "transition_layers", "Animate the addition of layers to the plot. Can also remove layers.",
   "transition_filter", "Transition between a collection of subsets from the data.",
-  "transition_events", "Define entrance and exit times of each visual element (row of data)"
+  "transition_events", "Define entrance and exit times of each visual element (row of data)."
 ) %>% 
   kable(format = "html") %>%
   kableExtra::kable_styling(font_size = 26)
@@ -562,17 +562,56 @@ tribble(
 
 How the plot window changes through the animation.
 
+```{r views-tbl}
+tribble(
+  ~ Function, ~ Description,
+  "view_follow", "Change the view to follow the range of current data.",
+  "view_step", "Similar to view_follow, except the view is static between transitions.",
+  "view_step_manual", "Same as view_step, except view ranges are manuall defined.",
+  "view_zoom", "Similar to view_step, but appears smoother by zooming out then in.",
+  "view_zoom_manual", "Same as view_zoom, except view ranges are manuall defined."
+) %>% 
+  kable(format = "html") %>%
+  kableExtra::kable_styling(font_size = 26)
+```
+
 ---
 
 ## Shadows
 
-How the history of the animation is shown.
+How the history of the animation is shown. Useful to indicate speed of changes.
+
+```{r shadows-tbl}
+tribble(
+  ~ Function, ~ Description,
+  "shadow_mark", "Previous (and/or future) frames leave permananent background marks.",
+  "shadow_trail", "Similar to shadow_mark, except marks are from tweened data.",
+  "shadow_wake", "Shows a shadow which diminishes in size and/or opacity over time."
+) %>% 
+  kable(format = "html") %>%
+  kableExtra::kable_styling(font_size = 26)
+```
 
 ---
 
 ## Entrances and exits
 
 How elements of the plot appear and disappear.
+
+```{r enter-exit-tbl}
+tribble(
+  ~ Function, ~ Description,
+  "enter_appear/exit_disappear", "Poof! Instantly appears or disappears.",
+  "enter_fade/exit_fade", "Opacity is used to fade in or out the elements.",
+  "enter_grow/exit_shrink", "Element size will grow from or shrink to zero.",
+  "enter_recolour/exit_recolour", "Change element colours to blend into the background.",
+  "enter_fly/exit_fly", "Elements will move from/to a specific x,y position.",
+  "enter_drift/exit_drift", "Elements will shift relative from/to their x,y position.",
+  "enter_reset/exit_reset", "Clear all previously added entrace/exits."
+) %>% 
+  kable(format = "html") %>%
+  kableExtra::kable_styling(font_size = 26)
+```
 
 ---
 
