@@ -392,10 +392,10 @@ food_bc <- tsibbledata::aus_retail %>%
 p <- food_bc %>% 
   ggplot(aes(x = Month, y = Turnover)) + 
   geom_line() + 
-  transition_states(lambda, state_length = 0) + 
+  transition_states(1 - lambda, state_length = 0) + 
   view_follow() + 
-  ggtitle("Box-Cox transformed food retailing turnover (lambda = {closest_state})")
-animate(p, width = 900, height = 500)
+  ggtitle("Box-Cox transformed food retailing turnover (lambda = {format(1 - as.numeric(closest_state), digits = 2)})")
+animate(p, width = 900, height = 500, start_pause = 5, end_pause = 5, nframes = 110)
 ```
 
 ---
