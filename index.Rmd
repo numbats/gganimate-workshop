@@ -1,6 +1,6 @@
 ---
 title: "wombat::gganimate"
-subtitle: "Introduction to gganimate"
+subtitle: "The grammar of animation"
 author: 
   - "Mitchell O'Hara-Wild"
   - "Ursula Laa"
@@ -103,7 +103,7 @@ theme_set(
 .title[gganimate]
 .sticker-float[![gganimate](resources/gganimate.png)]
 
-## Introduction to gganimate
+## The grammar of animation
 
 .bottom[
 ### Mitchell O'Hara-Wild (`r fa("twitter", fill="#1da1f2")`[@mitchoharawild](https://twitter.com/mitchoharawild))
@@ -131,7 +131,7 @@ class: inverse
 .sticker-float[![gganimate](resources/gganimate.png)]
 
 .animated.rubberBand[
-.desc[Introduction to gganimate]
+.desc[The grammar of animation]
 ]
 
 ---
@@ -140,7 +140,7 @@ class: inverse
 .title[gganimate]
 .sticker-float[![gganimate](resources/gganimate.png)]
 
-.desc[Introduction to gganimate]
+.desc[The grammar of animation]
 
 .bottom[
 .animated.zoomInDown[
@@ -159,7 +159,7 @@ class: inverse
 .title[gganimate]
 .sticker-float[![gganimate](resources/gganimate.png)]
 
-.desc[Introduction to gganimate]
+.desc[The grammar of animation]
 
 .bottom[
 ### Mitchell O'Hara-Wild (`r fa("twitter", fill="#1da1f2")`[@mitchoharawild](https://twitter.com/mitchoharawild))
@@ -180,7 +180,7 @@ class: inverse
 .animated.hinge.sticker-float[![gganimate](resources/gganimate.png)]
 
 .animated.hinge[
-.desc[Introduction to gganimate]
+.desc[The grammar of animation]
 ]
 
 .animated.hinge.bottom[
@@ -882,7 +882,7 @@ ggplot(
 
 ---
 
-Exporting animations - Manual tours for example
+## Exporting animations
 
 ```{r export, echo=T, eval=F}
 anim_save(
@@ -925,6 +925,7 @@ class: inverse, center, middle
 # Make your own animation
 
 ---
+
 ## Simple alternative: Plotly
 
 We can also use plotly to easily make simple animations via ggplotly and the frames argument, or for more sophisticated applications using "plotlyProxyInvoke" to update inside a Shiny app (see example).
@@ -971,6 +972,8 @@ class: inverse, top
 
 .larger[
 `r fa("github", fill = "white")` Learn more on GitHub: [thomasp85/gganimate](https://github.com/thomasp85/gganimate)
+
+`r fa("wikipedia-w", fill = "white")` More examples on the wiki: [thomasp85/gganimate/wiki](https://github.com/thomasp85/gganimate/wiki)
 
 `r fa("desktop", fill = "white")` Review slides: [mitchelloharawild.com/wombat-gganimate](https://mitchelloharawild.com/wombat-gganimate)
 
