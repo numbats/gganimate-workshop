@@ -796,6 +796,50 @@ tribble(
 
 ---
 
+## Shadows
+
+Which shadow was used in the following animations?
+
+.pull-left[
+```{r shadow-wake}
+ggplot(iris, aes(Petal.Length, Sepal.Length)) +
+  geom_point(size = 2) +
+  labs(title = "{closest_state}") +
+  transition_states(Species, transition_length = 4, state_length = 1) +
+  shadow_wake(wake_length = 0.1)
+```
+]
+--
+
+.pull-right[
+`shadow_wake()`
+
+The older tails of the points shrink in size, leaving a "wake" behind it.
+]
+
+--
+
+<hr>
+
+.pull-right[
+```{r shadow-mark}
+ggplot(airquality, aes(Day, Temp)) +
+  geom_line(color = 'red', size = 1) +
+  transition_time(Month) +
+  shadow_mark(colour = 'black', size = 0.75)
+```
+]
+
+--
+
+.pull-left[
+`shadow_mark()`
+
+Permanent marks are left by previous points in the animation.
+]
+
+---
+
 ## Entrances and exits
 
 How elements of the plot appear and disappear.
@@ -924,7 +968,7 @@ ggplot(gapminder) +
 ---
 
 ## Making the gapminder animation
-### ggplot
+### Customise the colour and size of points
 
 .left-code[
 ```{r gm_plot5, echo=T, eval=F}
@@ -996,24 +1040,12 @@ What are appropriate some appropriate animation features?
 
 .pull-left[
 - Transitions?
-]
-
---
-
-.pull-right[
 - Views?
 ]
 
---
-
-.pull-left[
-- Shadows?
-]
-
---
-
 .pull-right[
 - Entrances/Exits?
+- Shadows?
 ]
 
 ---

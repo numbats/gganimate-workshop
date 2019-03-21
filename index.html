@@ -678,6 +678,8 @@ The view is changed without modifying the data. You can see the lines are shown 
 &lt;img src="figure/view-follow-1.gif" style="display: block; margin: auto;" /&gt;
 ]
 
+--
+
 .pull-left[
 `view_follow()`
 
@@ -712,6 +714,39 @@ How the history of the animation is shown. Useful to indicate speed of changes.
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+
+---
+
+## Shadows
+
+Which shadow was used in the following animations?
+
+.pull-left[
+&lt;img src="figure/shadow-wake-1.gif" style="display: block; margin: auto;" /&gt;
+]
+--
+
+.pull-right[
+`shadow_wake()`
+
+The older tails of the points shrink in size, leaving a "wake" behind it.
+]
+
+--
+
+&lt;hr&gt;
+
+.pull-right[
+&lt;img src="figure/shadow-mark-1.gif" style="display: block; margin: auto;" /&gt;
+]
+
+--
+
+.pull-left[
+`shadow_mark()`
+
+Permanent marks are left by previous points in the animation.
+]
 
 ---
 
@@ -867,7 +902,7 @@ ggplot(gapminder) +
 ---
 
 ## Making the gapminder animation
-### ggplot
+### Customise the colour and size of points
 
 .left-code[
 
@@ -940,24 +975,12 @@ What are appropriate some appropriate animation features?
 
 .pull-left[
 - Transitions?
-]
-
---
-
-.pull-right[
 - Views?
 ]
 
---
-
-.pull-left[
-- Shadows?
-]
-
---
-
 .pull-right[
 - Entrances/Exits?
+- Shadows?
 ]
 
 ---
