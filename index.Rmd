@@ -731,19 +731,21 @@ class: inverse, center, middle
 
 ---
 
+## Making the gapminder animation
+
 .left-code[
 ```{r gm_plot1, echo=T, eval=F}
 library(gapminder)
 theme_set(theme_bw())
 
-p <- ggplot(
-  gapminder,
-  aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
-) +
+gapminder %>% 
+  ggplot(aes(
+    x = gdpPercap, y=lifeExp,
+    size = pop, colour = country
+  )) +
   geom_point(show.legend = FALSE) +
   scale_x_log10() +
   labs(x = "GDP per capita", y = "Life expectancy")
-p
 ```
 ]
 .right-plot[
@@ -753,16 +755,14 @@ p
 
 ---
 
-How would you turn this into an animation?
+## Turning this into an animation...
 
 ```{r gm_plot1agian, echo=T, eval=F}
 library(gapminder)
 theme_set(theme_bw())
 
-ggplot(
-  gapminder,
-  aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
-) +
+gapminder %>% 
+  ggplot(aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)) +
   geom_point(show.legend = FALSE) +
   scale_x_log10() +
   labs(x = "GDP per capita", y = "Life expectancy")
@@ -770,15 +770,35 @@ ggplot(
 
 --
 
-- Use the `transistion_*()` family
+What are appropriate some appropriate animation features?
 
 --
 
-- `transition_time(year)`
+.pull-left[
+- Transitions?
+]
+
+--
+
+.pull-right[
+- Views?
+]
+
+--
+
+.pull-left[
+- Shadows?
+]
+
+--
+
+.pull-right[
+- Entrances/Exits?
+]
 
 ---
 
-transition on year
+## Transition with time: animating over year
 
 .left-code[
 ```{r gm_plot2_a, echo=T, eval=F}
@@ -804,7 +824,7 @@ ggplot(
 
 ---
 
-View - fix width to the x-axis (scale to y-axis)
+## Changing the view: scaling the y-axis to the data
 
 .left-code[
 ```{r gm_plot3, echo=T, eval=F}
@@ -828,10 +848,13 @@ ggplot(
 ```
 ]
 
+--
+
+Does this add value to the animation?
 
 ---
 
-Shadows - past points to show rate of change
+## Shadow the past: highlight the rate of change
 
 .left-code[
 ```{r gm_plot4, echo=T, eval=F}
@@ -857,7 +880,7 @@ ggplot(
 
 ---
 
-Add your own flavour!
+## Add your own flavour!
 
 ```{r gm_plot5, echo=T, eval=F}
 library(gapminder)
