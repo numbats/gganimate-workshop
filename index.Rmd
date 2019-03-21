@@ -565,8 +565,14 @@ How elements of the plot appear and disappear.
 How data moves from one position to another. 
 
 ```r
-ease_aes({aesthetic} = {ease})
+p + ease_aes({aesthetic} = {ease})
+p + ease_aes(x = "cubic")
 ```
+[![ease examples](resources/ease.png)](https://easings.net/)
+
+.footnote[
+Source: https://easings.net/
+]
 
 ---
 
