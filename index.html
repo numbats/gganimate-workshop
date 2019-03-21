@@ -240,6 +240,16 @@ Is animation needed? Does it provide additional value?
 
 
 <video autoplay>
+        <source src="resources/ts-start.mp4" type="video/mp4">
+      </video>
+
+---
+
+## Usefulness of animation
+
+### Animated
+
+<video autoplay>
         <source src="resources/ts-zoom.mp4" type="video/mp4">
       </video>
 
@@ -251,18 +261,41 @@ Is animation needed? Does it provide additional value?
 
 
 
-&lt;iframe src="resources/electricity_plotly.html" width = "800px", height = "500px" seamless="seamless" frameBorder="0"&gt;&lt;/iframe&gt; 
+&lt;iframe src="resources/electricity_plotly.html" width = "1000px", height = "500px" seamless="seamless" frameBorder="0"&gt;&lt;/iframe&gt; 
 
 
 ---
 
-TODO: second example with BoxCox
+## Usefulness of animation
+
+### Static
+
+&lt;img src="figure/bc-static-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
-## Your turn
+## Usefulness of animation
 
-audience - think how you can use animations
+### Animated
+
+&lt;img src="figure/bc-anim-1.gif" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Usefulness of animation
+
+### Interactive
+
+&lt;iframe src="https://ebsmonash.shinyapps.io/gganimateBoxCox/?showcase=0" width="100%" height="650px"&gt;&lt;/iframe&gt;
+
+---
+class: inverse, center, middle
+
+.sticker-float[![gganimate](resources/gganimate.png)]
+
+.title[Your turn]
+
+# Think how you can use animations
 
 ---
 ## The basis - ggplot2
@@ -458,19 +491,19 @@ How the data changes through the animation.
 &lt;tbody&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; transition_manual &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Build an animation frame by frame (no tweening applied) &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Build an animation frame by frame (no tweening applied). &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; transition_states &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Transition between frames of a plot (like moving between facets) &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Transition between frames of a plot (like moving between facets). &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; transition_time &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Like transition_states, except animation pacing respects time &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Like transition_states, except animation pacing respects time. &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; transition_components &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Independent animation of plot elements (by group) &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Independent animation of plot elements (by group). &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; transition_reveal &lt;/td&gt;
@@ -486,7 +519,7 @@ How the data changes through the animation.
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; transition_events &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Define entrance and exit times of each visual element (row of data) &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Define entrance and exit times of each visual element (row of data). &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -497,17 +530,110 @@ How the data changes through the animation.
 
 How the plot window changes through the animation.
 
+&lt;table class="table" style="font-size: 26px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Function &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Description &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; view_follow &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Change the view to follow the range of current data. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; view_step &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Similar to view_follow, except the view is static between transitions. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; view_step_manual &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Same as view_step, except view ranges are manuall defined. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; view_zoom &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Similar to view_step, but appears smoother by zooming out then in. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; view_zoom_manual &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Same as view_zoom, except view ranges are manuall defined. &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
 ---
 
 ## Shadows
 
-How the history of the animation is shown.
+How the history of the animation is shown. Useful to indicate speed of changes.
+
+&lt;table class="table" style="font-size: 26px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Function &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Description &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; shadow_mark &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Previous (and/or future) frames leave permananent background marks. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; shadow_trail &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Similar to shadow_mark, except marks are from tweened data. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; shadow_wake &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Shows a shadow which diminishes in size and/or opacity over time. &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
 ---
 
 ## Entrances and exits
 
 How elements of the plot appear and disappear.
+
+&lt;table class="table" style="font-size: 26px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Function &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Description &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; enter_appear/exit_disappear &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Poof! Instantly appears or disappears. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; enter_fade/exit_fade &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Opacity is used to fade in or out the elements. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; enter_grow/exit_shrink &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Element size will grow from or shrink to zero. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; enter_recolour/exit_recolour &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Change element colours to blend into the background. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; enter_fly/exit_fly &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Elements will move from/to a specific x,y position. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; enter_drift/exit_drift &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Elements will shift relative from/to their x,y position. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; enter_reset/exit_reset &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Clear all previously added entrace/exits. &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
 ---
 
@@ -526,11 +652,17 @@ Source: https://easings.net/
 ]
 
 ---
+class: inverse, center, middle
 
-Your turn: 
+.sticker-float[![gganimate](resources/gganimate.png)]
 
-gapminder -- static ggplot
+.title[Your turn]
 
+# Making the gapminder animation
+
+&lt;iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/jbkSRLYSojo?rel=0&amp;amp;start=240" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+
+---
 
 .left-code[
 
@@ -700,11 +832,42 @@ anim_save(
 
 ## Exporting animations
 
-Renderer options
+### Renderer options
 
-```
-#&gt; [1] "av_renderer"     "ffmpeg_renderer" "file_renderer"   "gifski_renderer" "magick_renderer" "sprite_renderer"
-```
+&lt;table class="table" style="font-size: 26px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Function &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Description &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; gifski_renderer &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Default, super fast gif renderer. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; magick_renderer &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Somewhat slower gif renderer. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; ffmpeg_renderer &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Uses ffmpeg to create a video from the animation. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; av_renderer &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Uses the av package to create a video (using ffmpeg). &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; file_renderer &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Dumps a list of image frames from the animation. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; sprite_renderer &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Creates a spritesheet from frames of the animation. &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
 
 ---

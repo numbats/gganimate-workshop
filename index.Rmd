@@ -280,7 +280,7 @@ Is animation needed? Does it provide additional value?
 
 ### Static
 
-```{r ts-static, echo = FALSE}
+```{r ts-static, echo = FALSE, fig.height = 6}
 tsibbledata::aus_elec %>% 
   filter(State == "Victoria") %>% 
   ggplot(aes(x = Time, y = Demand)) + 
@@ -294,7 +294,7 @@ tsibbledata::aus_elec %>%
 
 ### Static
 
-```{r ts-static-zoom, echo = FALSE}
+```{r ts-static-zoom, echo = FALSE, fig.height = 6}
 tsibbledata::aus_elec %>% 
   filter(State == "Victoria", yearmonth(Time) == yearmonth("2014 June")) %>% 
   ggplot(aes(x = Time, y = Demand)) + 
@@ -314,15 +314,27 @@ p <- tsibbledata::aus_elec %>%
   ggplot(aes(x = Time, y = Demand)) + 
   geom_line() + 
   labs(title = "Half-hourly electricity demand", subtitle = "Victoria, Australia") +
-  view_step_manual(1,10, 
-                   c(ymd_hms("2012-01-01 00:00:00"), ymd_hms("2013-7-01 00:00:00")), 
+  transition_states(State, wrap = FALSE) + 
+  view_step_manual(1,10,
+                   c(ymd_hms("2012-01-01 00:00:00"), ymd_hms("2013-7-01 00:00:00")),
                    c(ymd_hms("2014-12-31 23:59:59"), ymd_hms("2013-7-30 23:59:59")),
                    c(2857.946, 3034.097),
                    c(9345.004,  6543.203),
-                   wrap = FALSE)# %>% 
+                   wrap = FALSE)
 
-anim_save("resources/ts-zoom.mp4", p, renderer = ffmpeg_renderer())
+anim_save("resources/ts-zoom.mp4", p, renderer = ffmpeg_renderer(options = list(pix_fmt = "yuv420p")),
+          width = 900, height = 500)
 ```
+```{r}
+mp4_vid("resources/ts-start.mp4")
+```
+
+---
+
+## Usefulness of animation
+
+### Animated
+
 ```{r}
 mp4_vid("resources/ts-zoom.mp4")
 ```
@@ -342,18 +354,69 @@ p <- tsibbledata::aus_elec %>%
 htmlwidgets::saveWidget(ggplotly(p), "~/github/gganimate-workshop/resources/electricity_plotly.html")
 ```
 
-<iframe src="resources/electricity_plotly.html" width = "800px", height = "500px" seamless="seamless" frameBorder="0"></iframe> 
+<iframe src="resources/electricity_plotly.html" width = "1000px", height = "500px" seamless="seamless" frameBorder="0"></iframe> 
 
 
 ---
 
-TODO: second example with BoxCox
+## Usefulness of animation
+
+### Static
+
+```{r bc-static, fig.height = 6}
+tsibbledata::aus_retail %>% 
+  filter(Industry == "Food retailing") %>% 
+  summarise(Turnover = sum(Turnover)) %>% 
+  mutate(`Box-Cox (lambda = 0.5)` = fablelite::box_cox(Turnover, 0.5), log(Turnover)) %>% 
+  gather(Transformation, Value, factor_key = TRUE) %>% 
+  ggplot(aes(x = Month, y = Value)) + 
+  geom_line() + 
+  facet_wrap(vars(Transformation), ncol = 3, scales = "free_y")
+```
 
 ---
 
-## Your turn
+## Usefulness of animation
 
-audience - think how you can use animations
+### Animated
+
+```{r bc-anim, fig.height = 6}
+library(rlang)
+food_bc <- tsibbledata::aus_retail %>% 
+  filter(Industry == "Food retailing") %>% 
+  summarise(Turnover = sum(Turnover)) %>% 
+  mutate(!!!set_names(map(seq(0,1,0.01), ~ expr(fablelite::box_cox(Turnover, !!.x))), seq(0,1,0.01))) %>% 
+  gather(lambda, Turnover) %>% 
+  mutate(lambda = as.numeric(lambda))
+
+p <- food_bc %>% 
+  ggplot(aes(x = Month, y = Turnover)) + 
+  geom_line() + 
+  transition_states(lambda, state_length = 0) + 
+  view_follow() + 
+  ggtitle("Box-Cox transformed food retailing turnover (lambda = {closest_state})")
+animate(p, width = 900, height = 500)
+```
+
+---
+
+## Usefulness of animation
+
+### Interactive
+
+```{r BoxCoxShiny, echo=FALSE}
+knitr::include_app("https://ebsmonash.shinyapps.io/gganimateBoxCox/",
+  height = "650px")
+```
+
+---
+class: inverse, center, middle
+
+.sticker-float[![gganimate](resources/gganimate.png)]
+
+.title[Your turn]
+
+# Think how you can use animations
 
 ---
 ## The basis - ggplot2
@@ -630,11 +693,17 @@ Source: https://easings.net/
 ]
 
 ---
+class: inverse, center, middle
 
-Your turn: 
+.sticker-float[![gganimate](resources/gganimate.png)]
 
-gapminder -- static ggplot
+.title[Your turn]
 
+# Making the gapminder animation
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/jbkSRLYSojo?rel=0&amp;start=240" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+---
 
 .left-code[
 ```{r gm_plot1, echo=T, eval=F}
@@ -803,10 +872,20 @@ knitr::include_graphics("./resources/DIS_mt.gif")
 
 ## Exporting animations
 
-Renderer options
-```{r}
-fns <- ls(as.environment("package:gganimate"))
-fns[grepl("renderer", fns)]
+### Renderer options
+
+```{r renderer-tbl}
+tribble(
+  ~ Function, ~ Description,
+  "gifski_renderer", "Default, super fast gif renderer.",
+  "magick_renderer", "Somewhat slower gif renderer.",
+  "ffmpeg_renderer", "Uses ffmpeg to create a video from the animation.",
+  "av_renderer", "Uses the av package to create a video (using ffmpeg).",
+  "file_renderer", "Dumps a list of image frames from the animation.",
+  "sprite_renderer", "Creates a spritesheet from frames of the animation."
+) %>% 
+  kable(format = "html") %>%
+  kableExtra::kable_styling(font_size = 26)
 ```
 
 
