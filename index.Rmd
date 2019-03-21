@@ -1008,7 +1008,6 @@ class: center
 
 ## Other animation libraries to check out
 
-=======
 <br>
 
 ### [D3.js](https://d3js.org/)
