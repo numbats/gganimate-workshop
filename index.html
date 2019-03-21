@@ -6,6 +6,7 @@
     <meta name="author" content="Mitchell O’Hara-Wild" />
     <meta name="author" content="Ursula Laa" />
     <meta name="author" content="Nicholas Spyrison" />
+    <script src="libs/kePrint/kePrint.js"></script>
     <script src="libs/htmlwidgets/htmlwidgets.js"></script>
     <script src="libs/plotly-binding/plotly.js"></script>
     <script src="libs/typedarray/typedarray.min.js"></script>
@@ -447,6 +448,49 @@ More details about gganimate ideas (transitions, views, shadows, enter/exit, con
 
 How the data changes through the animation.
 
+&lt;table class="table" style="font-size: 26px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Function &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Description &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; transition_manual &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Build an animation frame by frame (no tweening applied) &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; transition_states &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Transition between frames of a plot (like moving between facets) &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; transition_time &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Like transition_states, except animation pacing respects time &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; transition_components &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Independent animation of plot elements (by group) &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; transition_reveal &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Gradually extends the data used to reveal more information. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; transition_layers &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Animate the addition of layers to the plot. Can also remove layers. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; transition_filter &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Transition between a collection of subsets from the data. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; transition_events &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Define entrance and exit times of each visual element (row of data) &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
 ---
 
 ## Views
@@ -472,8 +516,14 @@ How elements of the plot appear and disappear.
 How data moves from one position to another. 
 
 ```r
-ease_aes({aesthetic} = {ease})
+p + ease_aes({aesthetic} = {ease})
+p + ease_aes(x = "cubic")
 ```
+[![ease examples](resources/ease.png)](https://easings.net/)
+
+.footnote[
+Source: https://easings.net/
+]
 
 ---
 

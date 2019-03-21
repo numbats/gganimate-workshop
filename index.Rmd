@@ -540,6 +540,22 @@ More details about gganimate ideas (transitions, views, shadows, enter/exit, con
 
 How the data changes through the animation.
 
+```{r transition-tbl}
+tribble(
+  ~ Function, ~ Description,
+  "transition_manual", "Build an animation frame by frame (no tweening applied)",
+  "transition_states", "Transition between frames of a plot (like moving between facets)",
+  "transition_time", "Like transition_states, except animation pacing respects time",
+  "transition_components", "Independent animation of plot elements (by group)",
+  "transition_reveal", "Gradually extends the data used to reveal more information.",
+  "transition_layers", "Animate the addition of layers to the plot. Can also remove layers.",
+  "transition_filter", "Transition between a collection of subsets from the data.",
+  "transition_events", "Define entrance and exit times of each visual element (row of data)"
+) %>% 
+  kable(format = "html") %>%
+  kableExtra::kable_styling(font_size = 26)
+```
+
 ---
 
 ## Views
