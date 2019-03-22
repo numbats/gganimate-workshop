@@ -603,6 +603,8 @@ New layers are being added (and removed) over the dots.
 &lt;hr&gt;
 
 .pull-right[
+
+
 ![](resources/tile-mean.gif)
 ]
 
@@ -638,7 +640,7 @@ How the plot window changes through the animation.
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; view_step_manual &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Same as view_step, except view ranges are manuall defined. &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Same as view_step, except view ranges are manually defined. &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; view_zoom &lt;/td&gt;
@@ -646,7 +648,7 @@ How the plot window changes through the animation.
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; view_zoom_manual &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Same as view_zoom, except view ranges are manuall defined. &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Same as view_zoom, except view ranges are manually defined. &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -963,6 +965,8 @@ ggplot(gapminder) +
       size = pop, colour = country)) +
   geom_point(show.legend = FALSE) +
   scale_x_log10() +
+  scale_color_viridis_d() +
+  scale_size(range = c(2, 12)) +
   labs(x = "GDP per capita", y = "Life expectancy") +
 * ???
 ```
@@ -993,12 +997,13 @@ What are appropriate some appropriate animation features?
 library(gapminder)
 theme_set(theme_bw())
 
-ggplot(
-  gapminder,
-  aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
-) +
+ggplot(gapminder) + 
+  aes(x = gdpPercap, y=lifeExp, 
+      size = pop, colour = country) +
   geom_point(show.legend = FALSE) +
   scale_x_log10() +
+  scale_color_viridis_d() +
+  scale_size(range = c(2, 12)) +
   labs(x = "GDP per capita", y = "Life expectancy") +
 * transition_time(year) +
 * labs(title = "Year: {frame_time}")
@@ -1019,12 +1024,13 @@ ggplot(
 library(gapminder)
 theme_set(theme_bw())
 
-ggplot(
-  gapminder,
-  aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
-) +
+ggplot(gapminder) + 
+  aes(x = gdpPercap, y=lifeExp, 
+      size = pop, colour = country) +
   geom_point(show.legend = FALSE) +
   scale_x_log10() +
+  scale_color_viridis_d() +
+  scale_size(range = c(2, 12)) +
   labs(x = "GDP per capita", y = "Life expectancy") +
   transition_time(year) +
   labs(title = "Year: {frame_time}") +
@@ -1049,12 +1055,13 @@ Does this add value to the animation?
 library(gapminder)
 theme_set(theme_bw())
 
-ggplot(
-  gapminder,
-  aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
-) +
+ggplot(gapminder) + 
+  aes(x = gdpPercap, y=lifeExp, 
+      size = pop, colour = country) +
   geom_point(show.legend = FALSE) +
   scale_x_log10() +
+  scale_color_viridis_d() +
+  scale_size(range = c(2, 12)) +
   labs(x = "GDP per capita", y = "Life expectancy") +
   transition_time(year) +
   labs(title = "Year: {frame_time}") +
@@ -1076,12 +1083,13 @@ Can you see countries that move rapidly?
 library(gapminder)
 theme_set(theme_bw())
 
-ggplot(
-  gapminder,
-  aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
-) +
+ggplot(gapminder) + 
+  aes(x = gdpPercap, y=lifeExp, 
+      size = pop, colour = country) +
   geom_point(show.legend = FALSE) +
   scale_x_log10() +
+  scale_color_viridis_d() +
+  scale_size(range = c(2, 12)) +
   labs(x = "GDP per capita", y = "Life expectancy") +
   transition_time(year) +
   labs(title = "Year: {frame_time}")

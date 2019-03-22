@@ -706,6 +706,35 @@ New layers are being added (and removed) over the dots.
 <hr>
 
 .pull-right[
+```{r tile-average, eval = FALSE, echo = FALSE}
+tile_window <- tiler(elec_jan$datetime, .size = 24) %>%
+  map_dfr(function(x) tibble(xmin = min(x), xmax = max(x))) %>%
+  mutate(ymin = -Inf, ymax = Inf, group = row_number())
+elec_tile_mean <-
+  tibble(
+    datetime = make_datetime(2013, 1, 1:15, hour = 12),
+    ma_kwh24 = tile_dbl(elec_jan$avg_kwh, ~ mean(.x), .size = 24)
+  ) %>%
+  mutate(group = row_number())
+elec_tile_revealed <- elec_tile_mean %>%
+  reveal_group(group)
+elec_tile_mean <- ggplot() +
+  geom_line(aes(x = datetime, y = avg_kwh), data = elec_jan, colour = "grey", size = 1.2) +
+  geom_rect(aes(
+    xmin = xmin, xmax = xmax,
+    ymin = ymin, ymax = ymax,
+    group = group
+  ), data = tile_window, fill = "#9ecae1", alpha = 0.6) +
+  geom_point(aes(x = datetime, y = ma_kwh24), data = elec_tile_mean, size = 2, colour = "#de2d26") +
+  geom_line(aes(x = datetime, y = ma_kwh24), data = elec_tile_revealed, size = 1.2, colour = "#de2d26") +
+  xlab("Time") +
+  ylab("Average kwH") +
+  ylim(c(0, max(elec_jan$avg_kwh))) +
+  theme_bw() +
+  transition_manual(group)
+anim_save("tile-mean.gif", elec_tile_mean, width = 800, height = 250)
+```
+
 ![](resources/tile-mean.gif)
 ]
 
@@ -728,9 +757,9 @@ tribble(
   ~ Function, ~ Description,
   "view_follow", "Change the view to follow the range of current data.",
   "view_step", "Similar to view_follow, except the view is static between transitions.",
-  "view_step_manual", "Same as view_step, except view ranges are manuall defined.",
+  "view_step_manual", "Same as view_step, except view ranges are manually defined.",
   "view_zoom", "Similar to view_step, but appears smoother by zooming out then in.",
-  "view_zoom_manual", "Same as view_zoom, except view ranges are manuall defined."
+  "view_zoom_manual", "Same as view_zoom, except view ranges are manually defined."
 ) %>% 
   kable(format = "html") %>%
   kableExtra::kable_styling(font_size = 26)
@@ -1028,6 +1057,8 @@ ggplot(gapminder) +
       size = pop, colour = country)) +
   geom_point(show.legend = FALSE) +
   scale_x_log10() +
+  scale_color_viridis_d() +
+  scale_size(range = c(2, 12)) +
   labs(x = "GDP per capita", y = "Life expectancy") +
   ??? #<<
 ```
@@ -1057,12 +1088,13 @@ What are appropriate some appropriate animation features?
 library(gapminder)
 theme_set(theme_bw())
 
-ggplot(
-  gapminder,
-  aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
-) +
+ggplot(gapminder) + 
+  aes(x = gdpPercap, y=lifeExp, 
+      size = pop, colour = country) +
   geom_point(show.legend = FALSE) +
   scale_x_log10() +
+  scale_color_viridis_d() +
+  scale_size(range = c(2, 12)) +
   labs(x = "GDP per capita", y = "Life expectancy") +
   transition_time(year) + #<<
   labs(title = "Year: {frame_time}") #<<
@@ -1083,12 +1115,13 @@ ggplot(
 library(gapminder)
 theme_set(theme_bw())
 
-ggplot(
-  gapminder,
-  aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
-) +
+ggplot(gapminder) + 
+  aes(x = gdpPercap, y=lifeExp, 
+      size = pop, colour = country) +
   geom_point(show.legend = FALSE) +
   scale_x_log10() +
+  scale_color_viridis_d() +
+  scale_size(range = c(2, 12)) +
   labs(x = "GDP per capita", y = "Life expectancy") +
   transition_time(year) +
   labs(title = "Year: {frame_time}") +
@@ -1113,12 +1146,13 @@ Does this add value to the animation?
 library(gapminder)
 theme_set(theme_bw())
 
-ggplot(
-  gapminder,
-  aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
-) +
+ggplot(gapminder) + 
+  aes(x = gdpPercap, y=lifeExp, 
+      size = pop, colour = country) +
   geom_point(show.legend = FALSE) +
   scale_x_log10() +
+  scale_color_viridis_d() +
+  scale_size(range = c(2, 12)) +
   labs(x = "GDP per capita", y = "Life expectancy") +
   transition_time(year) +
   labs(title = "Year: {frame_time}") +
@@ -1140,12 +1174,13 @@ Can you see countries that move rapidly?
 library(gapminder)
 theme_set(theme_bw())
 
-ggplot(
-  gapminder,
-  aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
-) +
+ggplot(gapminder) + 
+  aes(x = gdpPercap, y=lifeExp, 
+      size = pop, colour = country) +
   geom_point(show.legend = FALSE) +
   scale_x_log10() +
+  scale_color_viridis_d() +
+  scale_size(range = c(2, 12)) +
   labs(x = "GDP per capita", y = "Life expectancy") +
   transition_time(year) +
   labs(title = "Year: {frame_time}")
