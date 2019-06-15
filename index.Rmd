@@ -8,16 +8,16 @@ author:
 date: '30/10/2018'
 output:
   xaringan::moon_reader:
-    chakra: libs/remark-latest.min.js
-    css: ["libs/slides.css",  "libs/animate.css"]
-    lib_dir: libs
+    chakra: ./libs/remark-latest.min.js
+    css: ["./libs/slides.css",  "./libs/animate.css"]
+    lib_dir: ./libs
     seal: false
     nature:
       highlightStyle: github
       ratio: '16:9'
       highlightLines: true
       countIncrementalSlides: false
-      beforeInit: ["libs/jquery/jquery.min.js", "libs/slides.js"]
+      beforeInit: ["./libs/jquery/jquery.min.js", "./libs/slides.js"]
 ---
 class: inverse
 
